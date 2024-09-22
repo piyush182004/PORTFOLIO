@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piyush's Portfolio</title>
+<style>
+/* Global Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    background-color: #000;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+/* Dashboard Navigation */
+.dashboard {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1100px;
+    height: 50px;
+    background-color: rgba(27, 27, 27, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.dashboard a {
+    color: #E1F030;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    position: relative;
+    font-size: 1em;
+}
+
+.dashboard a:hover {
+    color: #fff;
+}
+
+/* Page Styling */
+.page {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 5%;
+    scroll-snap-align: start;
+    position: relative;
+}
+
+/* Home Section */
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: #E1F030;
+}
+
+.bio {
+    flex: 1;
+    position: relative;
+    color: #E1F030;
+    animation: float-bio 3s ease-in-out infinite;
+}
+
+/* Floating bio animation */
+@keyframes float-bio {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.ellipse {
+    width: 350px;
+    height: 450px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    border: 5px solid #E1F030;
+    box-shadow: 0 0 15px #E1F030;
+    transition: all 0.3s ease;
+}
+
+/* Glow effect on hover */
+.image-container:hover .ellipse {
+    box-shadow: 0 0 30px 10px #E1F030;
+    transform: translateY(-20px);
+    animation: float-image 3s ease-in-out infinite;
+}
+
+.ellipse img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Floating animation on hover */
+@keyframes float-image {
+    0% { transform: translateY(-20px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(-20px); }
+}
+
+h1 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.bio p {
+    font-size: 1.3em;
+    margin: 10px 0;
+    color: #E1F030;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #8C8E00;
+    color: #E1F030;
+    text-decoration: none;
+    border: 2px solid #E1F030;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #E1F030;
+    color: #000;
+}
+
+/* Floating Arrow */
+.arrow {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 30px solid #E1F030;
+    animation: bounce 2s infinite;
+    cursor: pointer;
+}
+
+.arrow:hover {
+    transform: translateX(-50%) translateY(-5px);
+    transition: transform 0.3s ease;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, 10px); }
+}
+
+/* Past Events Section */
+.page#past-events {
+    background-color: #ffffff;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 80px;
+    overflow-y: scroll;
+}
+
+.page#past-events h2 {
+    font-size: 3em;
+    margin-top: 40px;
+    color: #080808;
+}
+
+.event {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%;
+    margin-bottom: 40px;
+    padding: 30px;
+    border-bottom: 2px solid #000;
+    transition: transform 0.3s ease;
+}
+
+.event:hover {
+    transform: scale(1.05);
+}
+
+.event .description {
+    width: 55%;
+    text-align: left;
+    padding-right: 20px;
+}
+
+.event img {
+    width: 40%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.event:nth-child(even) .description {
+    order: 2;
+    text-align: right;
+    padding-left: 20px;
+}
+/* Bio Section Below Past Events */
+
+
+/* Bio Section Below Past Events */
+.bio-below-events {
+    background-color: #1a1a1a; /* Dark background for better contrast */
+    color: #f4f4f4; /* Light text color for readability */
+    padding: 20px;
+    text-align: center;
+    font-size: 1.1em;
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 8px;
+    border: 2px solid #E1F030; /* Stroked border */
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.7); /* Subtle glowing effect */
+    animation: float-bio-below 4s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Floating effect */
+@keyframes float-bio-below {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.bio-below-events p {
+    margin: 0;
+    color: #f4f4f4;
+    font-weight: normal;
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.8), /* Illumination effect */
+                 0 0 20px rgba(255, 255, 0, 0.5); /* Outer glow */
+}
+
+
+
+/* Experience Section */
+.page#experiences {
+    background-color: #080808;
+    color: #fff;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.page#experiences h2 {
+    font-size: 3em;
+    margin-bottom: 40px;
+}
+
+.semicolon {
+    font-size: 4em;
+    position: absolute;
+    color: #E1F030;
+    transform: translateX(-50%);
+}
+
+.experience-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    width: 80%;
+    position: relative;
+}
+
+/* Experience Boxes */
+.experience-box {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    width: 70%;
+    padding: 20px;
+    border: 2px solid #E1F030;
+    border-radius: 8px;
+    background-color: #8C8E00;
+    color: #fff;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0px 0px 10px rgba(225, 240, 48, 0.5);
+}
+
+.experience-box img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+    border-radius: 50%;
+    border: 3px solid #E1F030;
+}
+
+.experience-box p {
+    font-size: 1.3em;
+    text-align: left;
+}
+
+.experience-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 20px rgba(225, 240, 48, 1);
+}
+
+.semicolon-box {
+    position: absolute;
+    left: -80px;
+    top: 0;
+    transform: translateY(50%);
+}
+
+/* Projects Section */
+/* Projects Section */
+.page#projects {
+    background-color: #121212;
+    color: #fff;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page#projects h2 {
+    font-size: 3em;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.project-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.project-box {
+    width: 250px;
+    height: 300px;
+    background-color: #8C8E00;
+    color: #fff;
+    border: 2px solid #E1F030;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0px 0px 15px rgba(225, 240, 48, 0.5);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.project-box img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-bottom: 2px solid #E1F030;
+}
+
+.project-box p {
+    font-size: 1.2em;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.project-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 25px rgba(225, 240, 48, 0.8);
+}
+
+.project-box::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 100px;
+    height: 100px;
+    background: rgba(225, 240, 48, 0.2);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.project-box:hover::before {
+    width: 120px;
+    height: 120px;
+    background: rgba(225, 240, 48, 0.4);
+}
+/* Bio Section Below Projects */
+.bio-below-projects {
+    background-color: #121212;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.bio-below-projects p {
+    font-size: 1.5em;
+    margin: 20px 0;
+    color: #E1F030;
+    position: relative;
+    z-index: 1;
+    animation: float-bio-below 3s ease-in-out infinite;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+@keyframes float-bio-below {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.bio-below-projects::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 150px;
+    background: rgba(225, 240, 48, 0.2);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    z-index: 0;
+}
+
+.bio-below-projects:hover::before {
+    width: 180px;
+    height: 180px;
+    background: rgba(225, 240, 48, 0.4);
+}
+
+
+/* Contact Section */
+.page#contact {
+    background-color: #080808;
+    color: #E1F030;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.contact-header {
+    font-size: 3em;
+    margin-bottom: 40px;
+}
+
+.contact-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.contact-icons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.contact-icons a {
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.contact-icons a:hover {
+    transform: scale(1.2);
+}
+
+.contact-icons img {
+    width: 60px;
+    height: 60px;
+    filter: invert(1);
+}
+
+.contact-image-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.contact-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #E1F030;
+    transition: all 0.3s ease;
+}
+
+.contact-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contact-image-container:hover .contact-image {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px 5px rgba(225, 240, 48, 0.7);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(-10px); }
+    50% { transform: translateY(-15px); }
+}
+
+.contact-image-container:hover .contact-image {
+    animation: float 3s ease-in-out infinite;
+}
+
+.thank-you-note {
+    font-size: 1.2em;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+</style>
+</head>
+<body>
+
+
+<!-- Navigation -->
+<nav class="dashboard">
+    <a href="#home">HOME</a>
+    <a href="#past-events">PAST EVENTS</a>
+    <a href="#experiences">EXPERIENCES</a>
+    <a href="#projects">PROJECTS</a>
+    <a href="#contact">GET IN TOUCH</a>
+</nav>
+
+<!-- Home Section -->
+<div class="page" id="home">
+    <div class="content">
+        <div class="bio">
+            <h1>Hi, I'm Piyush Kumar Mondal</h1>
+            <p>I am a sophomore at JIS College of Engineering, the founding admin of CODASAURUS, and a core member of DevDotCom. As a machine learning enthusiast, I am passionate about exploring innovative AI technologies and contributing to tech communities. I enjoy organizing events, workshops, and hackathons to foster collaboration and learning among like-minded individuals. My dedication to both coding and community building drives me to make a meaningful impact in the tech world.</p>
+            <a href="#contact" class="btn">Get in Touch</a>
+        </div>
+        <div class="image-container">
+            <div class="ellipse">
+                <img src="static/images/DP_1.jpeg" alt="Piyush's Image">
+            </div>
+        </div>
+    </div>
+    <div class="arrow"></div>
+</div>
+
+<!-- Past Events Section -->
+<div class="page" id="past-events">
+    <h2>Past Events</h2>
+    <!-- Bio Section Below Past Events -->
+<div class="bio-below-events">
+    <p>I’m involved in various activities that extend beyond coding, including organizing events and engaging with technology communities. These experiences enrich my understanding and fuel my passion for continuous learning and growth.</p>
+</div>
+
+    <div class="event">
+        <div class="description">
+            <h3>Event 1: Blockchain Webinar</h3>
+            <p>This was an insightful webinar on understanding Blockchain and its real-world applications. Hosted with NonceBlox,a Dubai based Blockchain Company.</p>
+        </div>
+        <img src="static/images/NONCEBLOX_EVENT_IAGE.jpeg" alt="Event 1">
+    </div>
+    <div class="event">
+        <img src="static/images/INTERNATIONAL_EVENT.jpeg" alt="Event 2">
+        <div class="description">
+            <h3>Event 2: INTERNATIONAL EVENT</h3>
+            <p>An exciting International Event focusing on Artificial Intelligence, attracting global participation.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Experience Section -->
+<div class="page" id="experiences">
+    <h2>My Experiences</h2>
+    <div class="experience-container">
+        <div class="experience-box">
+            <img src="static/images/DEVDOTCOM.jpeg" alt="DEVDOTCOM">
+            <p>CORE MEMBER || Working with diverse developer communities, hosting global webinars, and contributing to open-source projects.</p>
+        </div>
+        <div class="experience-box">
+            <img src="static/images/COSADARAS_IMAGE.jpg" alt="Experience 2">
+            <p>FOUNDING LEAD || Organized events for blockchain enthusiasts, coding competitions, and tech discussions to promote technology awareness.</p>
+        </div>
+         <div class="experience-box">
+            <img src="static/images/NONCEBLOX_LOGO.jpg" alt="Experience 2">
+            <p>CAMPUS AMBASSADOR || Organized events for blockchain enthusiasts, coding competitions, and tech discussions to promote technology awareness.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Projects Section -->
+<!-- Projects Section -->
+<div class="page" id="projects">
+    <h2>My Projects</h2>
+    <!-- Bio Section Below Projects -->
+<div class="bio-below-projects">
+    <p>I love building projects that challenge me and allow me to innovate. My passion lies in transforming complex problems into elegant solutions, and I thrive on learning new technologies and methodologies. Each project is an opportunity to explore, experiment, and excel. Join me on this journey as I continue to create and grow in the world of technology!</p>
+</div>
+
+    <div class="project-container">
+        <div class="project-box">
+            <img src="static/images/THEFT_DEETCTION.jpg" alt="Project 1">
+            <p>Project 1: Real-time Word Detection using OpenCV. An innovative project leveraging real-time image processing to identify and extract text from live video.</p>
+        </div>
+        <div class="project-box">
+            <img src="static/images/IMG_20240907_012911_272 (2).png" alt="Project 2">
+            <p>Project 2: BHARAT-SRIJAN. A system designed to promote Indian Cultures & Art efficiently.</p>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Contact Section -->
+ <div class="page" id="contact">
+    <h2 class="contact-header">Get in Touch with Me</h2>
+    <div class="contact-content">
+        <div class="contact-icons">
+            <a href="https://github.com/" target="_blank">
+                <img src="https://img.icons8.com/material-outlined/24/000000/github.png" alt="GitHub">
+            </a>
+            <a href="https://www.linkedin.com/in/piyush-mondal-a6588a277/" target="_blank">
+                <img src="https://img.icons8.com/material-outlined/24/000000/linkedin.png" alt="LinkedIn">
+            </a>
+            <a href="mailto:piyushmondal182004@gmail.com">
+                <img src="https://img.icons8.com/material-outlined/24/000000/mail.png" alt="Email">
+            </a>
+        </div>
+        <div class="contact-image-container">
+            <div class="contact-image">
+                <img src="static/images/DP_2.jpeg" alt="Piyush's Image">
+            </div>
+        </div>
+        <p class="thank-you-note">Thank you for visiting my portfolio! I'm always excited to connect with fellow developers, potential collaborators, or anyone interested in technology. Feel free to reach out through any of the platforms above. Let's create something amazing together!</p>
+    </div>
+</div>
+
+</body>
+</html>"
